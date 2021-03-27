@@ -8,16 +8,16 @@
         </div>
         <div class="col-9 pt-5">
             <div class="div">
-                <h1>{{ Auth::user()->username }}</h1>
+                <h1>{{ $user->username }}</h1>
             </div>
             <div class="d-flex">
                 <div class="pr-4"><strong>774</strong> posts</div>
                 <div class="pr-4"><strong>25.4m</strong> followers</div>
                 <div class="pr-4"><strong>6</strong> following</div>
             </div>
-            <div class="pt-4 font-weight-bold">apple</div>
-            <div>Everyone has a story to tell.</div>
-            <div>Tag #ShotoniPhone to take part.</div>
+            <div class="pt-4 font-weight-bold">{{ $user->profile->title }}</div>
+            <div>{{ $user->profile->description }}</div>
+            <div><a href="https://www.apple.com/">{{ $user->profile->url }}</a></div>
         </div>
     </div>
 
