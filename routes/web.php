@@ -19,6 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('p/create', [App\Http\Controllers\PostsController::class, 'create']);
+Route::post('p', [App\Http\Controllers\PostsController::class, 'store']);
+
 
 Auth::routes();
 
