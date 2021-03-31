@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
@@ -21,7 +22,22 @@ class PostsController extends Controller
             'image' => ['required', 'image']
         ]);
 
-        auth()->user()->posts()->create($data);
-        // dd(request()->all());
+        $imagePath = request('image')->store('uploads','public');
+
+        $image = Image::make(public_path("storage/{$imagePath}"))
+          ->fit(1200, 1200);
+        $image->save();
+
+        auth()->user()->posts()->create([
+          'caption' => $data['caption'],
+          'image' => $imagePath,
+        ]);
+
+        return redirect('/profile/' . auth()->user()->id);
+    }
+
+    public function show(\App\Models\Post $post)
+    {
+        return view('posts/show', compact('post'));
     }
 }
