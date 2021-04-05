@@ -18,13 +18,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Posts
+Auth::routes();
+
+// Post
 Route::get('p/create', [App\Http\Controllers\PostsController::class, 'create']);
 Route::post('p', [App\Http\Controllers\PostsController::class, 'store']);
 Route::get('p/{post}', [App\Http\Controllers\PostsController::class, 'show']);
 
+// Profile
+Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])
+    ->name('profile.show');
 
-Auth::routes();
+Route::get('/profile/{user}/edit', [App\Http\Controllers\ProfilesController::class, 'edit'])
+    ->name('profile.edit');
 
-// Users
-Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
+Route::patch('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'update'])
+    ->name('profile.update');
