@@ -27,9 +27,8 @@ class PostsController extends Controller
 
         $image = Image::make(public_path("storage/{$imagePath}"))
             ->fit(1200, 1200);
-        
-            $image
-            ->save();
+
+        $image->save();
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
